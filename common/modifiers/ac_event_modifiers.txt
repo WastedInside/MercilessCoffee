@@ -1,0 +1,73 @@
+poisoned = {
+	icon = health_negative
+	health = -99
+}
+
+dishonored = {
+	icon = love_negative
+	health = -0.05
+	attraction_opinion = -10
+}
+
+public_execution = {
+	icon = diplomacy_positive
+	direct_vassal_opinion = 50
+	dread_baseline_add = 30
+	dread_decay_mult = -0.5
+}
+
+ruffed_up = {
+	icon = health_negative
+	health = -0.25
+}
+
+beaten_up = {
+	icon = health_negative
+	health = -0.75
+}
+
+broken = {
+	icon = health_negative
+	health = -1
+}
+
+ac_wasteland = {
+	icon = martial_negative
+	development_growth_factor = -0.99
+	tax_mult = -0.95
+	build_speed = 0.95
+	levy_size = -0.95
+	supply_limit_mult = -0.95	
+}
+ac_looted = {
+	icon = county_modifier_development_negative
+	development_growth_factor = -0.15
+	tax_mult = -0.5
+}
+ac_influx = {
+	icon = county_modifier_development_positive
+	development_growth_factor = small_development_growth_gain
+	build_speed = -0.15
+	tax_mult = 0.15
+}
+
+has_immunity = {
+	icon = diplomacy_positive
+	diplomacy = 2
+}
+
+ac_genocide_en_route = {
+	icon = martial_negative
+	development_growth_factor = -0.99
+	tax_mult = -0.95
+	build_speed = 0.95
+	levy_size = -0.95
+	supply_limit_mult = -0.95
+	county_opinion_add = -100
+}
+
+ac_busy_hands = {
+	icon = county_modifier_development_negative
+	build_speed = 0.25
+	tax_mult = -0.25
+}

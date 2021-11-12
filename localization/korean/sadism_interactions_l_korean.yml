@@ -1,0 +1,12 @@
+﻿l_korean:
+ spay_interaction:0 "거세"
+ spay_interaction_desc:0 "[recipient.GetShortUINameNoTooltip](을)를 [GetTrait('spayed').GetName( GetPlayer )] 특성 보유자로 만듭니다."
+
+ deleg_interaction:0 "다리 절단"
+ deleg_interaction_desc:0 "[recipient.GetShortUINameNoTooltip](을)를 [GetTrait('one_legged').GetName( GetPlayer )] 특성 보유자로 만듭니다."
+
+ dearm_interaction:0 "팔 절단"
+ dearm_interaction_desc:0 "[recipient.GetShortUINameNoTooltip](을)를 [GetTrait('maimed').GetName( GetPlayer )] 특성 보유자로 만듭니다."
+
+ forced_copulation_interaction:0 "강간"
+ forced_copulation_interaction_desc:0 "[recipient.GetShortUINameNoTooltip](을)를 [GetTrait('pregnant').GetName( GetPlayer )] 특성 보유자로 만듭니다."

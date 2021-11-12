@@ -1,0 +1,255 @@
+namespace = ac
+
+#Events that fire as genocide is being conducted - Basic version, should be improved
+#Beginning of the purge
+ac.30 = {
+	type = character_event
+	title = ac.30.t
+	desc = ac.30.desc
+	theme = battle
+	override_background = {
+		event_background = army_camp
+	}
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+	}
+
+	#Let us begin!
+	option = {
+		name = ac.30.a
+		every_realm_county = {
+			limit = {
+				OR = { 
+					NOT = { culture = root.culture }
+					NOT = { faith = root.faith }						
+				}	
+			}
+			add_county_modifier = {	#The blood shall flow...
+				modifier = ac_genocide_en_route
+				days = 1825
+			}
+			change_county_control = -100
+			change_development_progress = monumental_development_progress_loss
+			if = {
+				limit = { development_towards_level_increase < monumental_development_progress_gain }
+				change_development_level = -2
+			}
+		}
+
+		add_prestige = -200
+		remove_short_term_gold = 1000
+		add_piety = -200 
+		trigger_event = {
+			id = ac.31
+			days = 340
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#On the second thought...
+	option = {
+		name = ac.30.b
+		add_piety = 1
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+#Diplomacy aspect
+ac.31 = {
+	type = character_event
+	title = ac.31.t
+	desc = ac.31.desc
+	theme = battle
+	override_background = {
+		event_background = terrain
+	}
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+	}
+
+	#The Plague!
+	option = {
+		name = ac.31.a
+
+		add_prestige = -400
+		add_piety = -400 
+		trigger_event = {
+			id = ac.32
+			days = 340
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Make Haste!
+	option = {
+		name = ac.31.b
+		root.capital_county = {
+			add_county_modifier = {	
+				modifier = ac_busy_hands
+				days = 340
+			}
+		}
+		remove_short_term_gold = 200
+		trigger_event = {
+			id = ac.32
+			days = 340
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Whatever...
+	option = {
+		name = ac.31.c
+		root.capital_county = {
+			add_county_modifier = {	
+				modifier = ac_busy_hands
+				years = 5
+			}
+		}
+		add_character_modifier = {
+			modifier = upset_troops_modifier
+			years = 5
+		}
+		trigger_event = {
+			id = ac.32
+			days = 340
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#Fate of the rest
+ac.32 = {
+	type = character_event
+	title = ac.32.t
+	desc = ac.32.desc
+	theme = battle
+	override_background = {
+		event_background = burning_building
+	}
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+	}
+
+	#Reservations
+	option = {
+		name = ac.32.a
+		add_piety = 100
+		remove_short_term_gold = 100 
+		trigger_event = {
+			id = ac.33
+			days = 340
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Final Solution
+	option = {
+		name = ac.32.b
+		add_piety = -200
+		trigger_event = {
+			id = ac.33
+			days = 340
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#Cultural memory
+ac.33 = {
+	type = character_event
+	title = ac.33.t
+	desc = ac.33.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+	}
+
+	#Burn and loot
+	option = {
+		name = ac.33.a
+		add_gold = 300
+		trigger_event = {
+			id = ac.34
+			days = 340
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Keep it
+	option = {
+		name = ac.33.b
+		add_prestige = 600
+		trigger_event = {
+			id = ac.34
+			days = 340
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+#Genocide ends
+ac.34 = {
+	type = character_event
+	title = ac.34.t
+	desc = ac.34.desc
+	theme = battle
+	override_background = {
+		event_background = army_camp
+	}
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+		every_realm_county = {
+			limit = {
+				has_county_modifier = ac_genocide_en_route	
+			}
+			remove_county_modifier = ac_genocide_en_route
+			change_county_control = 50
+			set_county_faith = root.faith
+			set_county_culture = root.culture
+		}		
+	}
+
+	#Evil Palpatine's laugh
+	option = {
+		name = ac.34.a
+		add_prestige = 200
+	}
+}

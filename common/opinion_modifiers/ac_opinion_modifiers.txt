@@ -1,0 +1,49 @@
+### RAPE ###
+raped_family_member = {
+	opinion = -100
+	years = 100
+	imprisonment_reason = yes
+}
+
+raped_me = {
+	opinion = -200
+	years = 200
+	imprisonment_reason = yes
+}
+
+
+### ARREST ###
+arrested_family_member = {
+	opinion = -5
+	years = 3
+	decaying = yes
+}
+
+arrested_me = {
+	opinion = -25
+	decaying = yes
+	years = 3
+	imprisonment_reason = yes
+}
+
+
+### EXECUTION ###
+publicly_executed_family_member = {
+	opinion = -30
+	years = 10
+	decaying = yes
+	imprisonment_reason = yes
+}
+
+### WAR ###
+razed_my_holding = {
+	opinion = -100
+	years = 20
+	decaying = yes
+	imprisonment_reason = yes
+}
+looted_my_holding = {
+	opinion = -50
+	years = 10
+	decaying = yes
+}

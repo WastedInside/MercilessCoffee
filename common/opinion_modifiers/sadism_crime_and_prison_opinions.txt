@@ -1,0 +1,48 @@
+### SPAYING ###
+spayed_family_member = {
+	opinion = -20
+	years = 20
+	decaying = yes
+}
+
+spayed_me = {
+	opinion = -50
+	decaying = yes
+	years = 50
+	imprisonment_reason = yes
+}
+
+### De-LEGGING ###
+delegged_family_member = {
+	opinion = -20
+	years = 20
+	decaying = yes
+}
+
+delegged_me = {
+	opinion = -50
+	decaying = yes
+	years = 50
+	imprisonment_reason = yes
+}
+
+### De-Arming ###
+dearmed_family_member = {
+	opinion = -20
+	years = 20
+	decaying = yes
+}
+
+dearmed_me = {
+	opinion = -50
+	decaying = yes
+	years = 50
+	imprisonment_reason = yes
+}
+
+### Forced-Copulation ###
+forced_copulate_opinion = {
+	opinion = -40
+	years = 10
+	decaying = yes
+}

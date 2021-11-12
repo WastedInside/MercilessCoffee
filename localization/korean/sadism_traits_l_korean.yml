@@ -1,0 +1,7 @@
+﻿l_korean:
+ trait_spayed:0 "거세됨"
+ trait_spayed_desc:0 "해당 인물은 고의적으로 거세됐습니다."
+ trait_spayed_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip](은)는 고의적으로 거세됐습니다."
+ trait_blind:0 "맹인"
+ trait_blind_desc:0 "해당 인물은 #EMP 사고#!로 인해 혹은 태어날 때부터 앞이 보이지 않습니다."
+ trait_blind_character_desc:0 "[ROOT.GetCharacter.GetFirstNameNoTooltip](은)는 #EMP 사고#!로 인해 혹은 태어날 때부터 앞이 보이지 않습니다."

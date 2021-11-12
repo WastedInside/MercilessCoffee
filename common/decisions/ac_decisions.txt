@@ -1,0 +1,160 @@
+#Time to hunt some untermensch
+	initiate_minor_purge = {
+		picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+		desc = initiate_minor_purge_decision_desc
+		is_shown = {
+			root = {
+				every_vassal_or_below = {
+					OR = {
+						AND = {
+							NOT = { faith = root.faith }
+							is_imprisoned = no
+						}
+						AND = {
+							NOT = { culture = root.culture }
+							is_imprisoned = no
+						}
+					}
+				}
+				OR = {
+					has_realm_law = tribal_authority_1
+					has_realm_law = tribal_authority_2
+					has_realm_law = tribal_authority_3
+					has_realm_law = crown_authority_1
+					has_realm_law = crown_authority_2
+					has_realm_law = crown_authority_3
+				}
+				is_ai = no
+			}
+		}
+
+		is_valid = {
+			root = {
+				is_independent_ruler = yes
+				is_adult = yes
+				NOT = {
+					has_trait = compassionate
+				}
+				NOT = { has_trait = incapable }
+			}
+		}
+		
+		cost = {
+			gold = 100
+		}
+		
+		effect = {
+			trigger_event = ac.20
+			save_scope_as = actor
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	initiate_mass_execution = {
+		picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+		desc = initiate_mass_execution_decision_desc
+		is_shown = {
+			root = {
+				any_prisoner = {
+					OR = {
+						NOT = { culture = root.culture }
+						NOT = { faith = root.faith }
+					}
+				}
+				OR = {
+					has_realm_law = tribal_authority_1
+					has_realm_law = tribal_authority_2
+					has_realm_law = tribal_authority_3
+					has_realm_law = crown_authority_1
+					has_realm_law = crown_authority_2
+					has_realm_law = crown_authority_3
+				}
+				is_ai = no
+			}
+		}
+
+		is_valid = {
+			root = {
+				is_independent_ruler = yes
+				is_adult = yes
+				NOT = {
+					has_trait = compassionate
+				}
+				NOT = { has_trait = incapable }
+			}
+		}
+		
+		cost = {
+		}
+		
+		effect = {
+			trigger_event = ac.19
+			save_scope_as = actor
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	initiate_genocide = {
+		picture = "gfx/interface/illustrations/decisions/decision_realm.dds"
+		desc = initiate_genocide_decision_desc
+		is_shown = {
+			root = {
+				any_realm_county = {
+					OR = { 
+						NOT = { culture = root.culture }
+						NOT = { faith = root.faith }						
+					}	
+				}
+				OR = {
+					has_realm_law = tribal_authority_0
+					has_realm_law = tribal_authority_1
+					has_realm_law = tribal_authority_2
+					has_realm_law = tribal_authority_3
+					has_realm_law = crown_authority_0
+					has_realm_law = crown_authority_1
+					has_realm_law = crown_authority_2
+					has_realm_law = crown_authority_3
+				}
+				is_ai = no
+			}
+		}
+
+		is_valid = {
+			root = {
+				is_independent_ruler = yes
+				is_adult = yes
+				NOT = {
+					has_trait = compassionate
+				}
+				NOT = { has_trait = incapable }
+				any_realm_county = {
+					NOT = { 
+						has_county_modifier = ac_genocide_en_route
+					}
+				}
+			}
+		}
+		
+		cost = {
+		}
+		
+		effect = {
+			root = {
+				trigger_event = {
+					id = ac.30
+					days = 7
+				}
+			}
+			save_scope_as = actor
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+	}

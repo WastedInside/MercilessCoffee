@@ -1,0 +1,14 @@
+recently_spayed = {
+	icon = health_negative
+	health = -0.25
+}
+
+recently_delegged = {
+	icon = health_negative
+	health = -0.25
+}
+
+recently_dearmed = {
+	icon = health_negative
+	health = -0.25
+}

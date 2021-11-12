@@ -1,0 +1,4 @@
+#Nicks#
+nick_the_scourge = {}
+nick_the_dreadful = {}
+nick_the_reaper = {}

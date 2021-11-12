@@ -1,0 +1,446 @@
+#Fuck this new code, it used to be easier in CK2
+ac.20 = {
+	type = character_event
+	title = ac.20.t
+	desc = ac.20.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+		save_scope_as = actor
+	}
+
+	#Heretics!
+	option = {
+		name = ac.20.a
+		trigger = {
+			every_vassal_or_below = {
+				AND = {
+					NOT = { faith = root.faith }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+		}
+		every_vassal_or_below = {
+			limit = {
+				AND = {
+					NOT = { faith = root.faith }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = root
+			}
+		}
+
+		add_dread = medium_dread_gain
+
+		every_vassal_or_below = {
+			trigger_event = ac.21
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#"Refugees"
+	option = {
+		name = ac.20.b
+		trigger = {
+			every_vassal_or_below = {
+				AND = {
+					NOT = { culture = root.culture }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+		}
+		every_vassal_or_below = {
+			limit = {
+				AND = {
+					NOT = { culture = root.culture }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = root
+			}
+		}
+
+		add_dread = medium_dread_gain
+
+		every_vassal_or_below = {
+			trigger_event = ac.22
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+	#All of this scum!
+	option = {
+		name = ac.20.c
+		trigger = {
+			every_vassal_or_below = {
+				OR = {
+					AND = {
+						NOT = { faith = root.faith }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+					AND = {
+						NOT = { culture = root.culture }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+				}
+			}
+		}
+		every_vassal_or_below = {
+			limit = {
+				OR = {
+					AND = {
+						NOT = { faith = root.faith }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+					AND = {
+						NOT = { culture = root.culture }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = root
+			}
+		}
+
+		add_dread = medium_dread_gain
+
+		every_vassal_or_below = {
+			trigger_event = ac.23
+		}
+
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+ac.19 = {
+	type = character_event
+	title = ac.19.t
+	desc = ac.19.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	immediate = {
+	}
+
+	#Butcher Heretics!
+	option = {
+		name = ac.19.a
+		trigger = {
+			every_prisoner = {
+				NOT = { faith = root.faith }
+			}
+		}
+		every_prisoner = {
+			limit = {
+				NOT = { faith = root.faith }
+			}
+			add_to_list = list_of_corpses
+		}
+
+		every_in_list = {
+			list = list_of_corpses
+
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+
+		add_dread = major_dread_gain
+		add_piety = 100
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Butcher "Refugees"
+	option = {
+		name = ac.19.b
+		trigger = {
+			every_prisoner = {
+				NOT = { culture = root.culture }
+			}
+		}
+		every_prisoner = {
+			limit = {
+				NOT = { culture = root.culture }
+			}
+			add_to_list = list_of_corpses
+		}
+
+		every_in_list = {
+			list = list_of_corpses
+
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+
+		add_dread = major_dread_gain
+
+		ai_chance = {
+			base = 0
+		}
+	}
+	#All of this scum!
+	option = {
+		name = ac.19.c
+		trigger = {
+			every_prisoner = {
+				OR = {
+					NOT = { culture = root.culture }
+					NOT = { faith = root.faith }
+				}
+			}
+		}
+		every_prisoner = {
+			limit = {
+				OR = {
+					NOT = { culture = root.culture }
+					NOT = { faith = root.faith }
+				}
+			}
+			add_to_list = list_of_corpses
+		}
+
+		every_in_list = {
+			list = list_of_corpses
+
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+
+		add_dread = major_dread_gain
+		add_piety = 100
+
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+ac.21 = {
+	type = character_event
+	title = ac.21.t
+	desc = ac.21.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	immediate = {
+		every_courtier = {
+			limit = {
+				AND = {
+					NOT = { faith = root.faith }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = scope:actor
+			}
+		}
+	}
+
+	#Okay M8...
+	option = {
+		name = ac.21.a
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+ac.22 = {
+	type = character_event
+	title = ac.22.t
+	desc = ac.22.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	immediate = {
+		every_courtier = {
+			limit = {
+				AND = {
+					NOT = { culture = root.culture }
+					is_imprisoned = no
+					NOT = { has_character_modifier = has_immunity }
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = scope:actor
+			}
+		}
+	}
+
+	#Okay M8...
+	option = {
+		name = ac.22.a
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+ac.23 = {
+	type = character_event
+	title = ac.23.t
+	desc = ac.23.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = fear
+	}
+
+	immediate = {
+		every_courtier = {
+			limit = {
+				OR = {
+					AND = {
+						NOT = { faith = root.faith }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+					AND = {
+						NOT = { culture = root.culture }
+						is_imprisoned = no
+						NOT = { has_character_modifier = has_immunity }
+					}
+				}
+			}
+			add_to_list = list_of_meat
+		}
+
+		every_in_list = {
+			list = list_of_meat
+
+			hidden_effect = {
+				add_character_flag = {
+					flag = block_imprisonment_event
+					days = 1
+				}
+			}
+
+			prisoner_of_war_capture_effect = {
+				TARGET = this
+				IMPRISONER = scope:actor
+			}
+		}
+	}
+
+	#Okay M8...
+	option = {
+		name = ac.23.a
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}

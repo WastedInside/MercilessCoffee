@@ -1,0 +1,344 @@
+namespace = ac
+
+#Initial event for razing - not available for kind, compassionate characters
+ac.12 = {
+	type = character_event
+	scope:root
+	title = ac.12.t
+	desc = ac.12.desc
+	theme = battle
+	override_background = {
+		event_background = burning_building
+	}
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:previous_controller 
+		animation = rage
+	}
+
+	trigger = {
+		root = {	
+			is_at_location = scope:barony.title_province
+			NOT = { has_trait = kind }
+			NOT = { has_trait = compassionate }
+			is_ai = no
+		}
+		scope:county = { 
+				NAND = { 
+					has_county_modifier = ac_wasteland 
+					has_county_modifier = ac_looted 
+				}
+		}
+	}
+
+	immediate = {
+	}
+
+	#Raze it to the ground!
+	option = {
+		name = ac.12.a
+		trigger = {
+			NOT = {
+				scope:county = { has_county_modifier = ac_wasteland }	
+			}
+		}
+		scope:county = {
+			add_county_modifier = {	#Destroy it, ah-ha-ha-hah
+				modifier = ac_wasteland
+				years = 10
+			}
+			add_county_modifier = {	#Burn-burn-burn
+				modifier = ac_looted
+				years = 10
+			}
+			add_county_modifier = {	#Prevent the county from being sacked again for quite a while.
+				modifier = recently_sacked_modifier
+				years = 10
+			}
+			change_county_control = -100
+			change_development_progress = monumental_development_progress_loss
+			if = {
+				limit = { development_towards_level_increase < monumental_development_progress_gain }
+				change_development_level = -2
+			}
+			holder = {
+				add_opinion = {
+					modifier = razed_my_holding
+					target = root
+				}
+			}
+		}
+
+		stress_impact = {
+			cruel = medium_stress_impact_loss
+			sadistic = medium_stress_impact_gain
+		}
+
+		add_prestige = major_prestige_value
+		add_gold = scope:barony.county.title_province.raid_gold_value
+		add_gold = 100
+		trigger_event = { id = ac.13 }
+
+		ai_chance = {
+			base = 0
+		}
+	}
+
+	#Loot it!
+	option = {
+		name = ac.12.b
+
+		trigger = {
+			NOR = {
+				scope:county = { has_county_modifier = ac_looted }
+				scope:county = { has_county_modifier = ac_wasteland }	
+			}
+		}
+		scope:county = {
+			add_county_modifier = {	#Burn-burn-burn
+				modifier = ac_looted
+				years = 10
+			}
+			add_county_modifier = {	#Prevent the county from being sacked again for quite a while.
+				modifier = recently_sacked_modifier
+				years = 10
+			}
+			change_county_control = -20
+			change_development_progress = medium_development_progress_loss
+			if = {
+				limit = { development_towards_level_increase < medium_development_progress_gain }
+				change_development_level = -1
+			}
+			holder = {
+				add_opinion = {
+					modifier = looted_my_holding
+					target = root
+				}
+			}
+		}
+		add_gold = scope:barony.county.title_province.raid_gold_value
+		add_gold = 200
+		add_prestige = medium_prestige_value
+		trigger_event = { id = ac.14 }
+
+		root.capital_county = {
+			change_development_progress = major_development_progress_gain
+		}
+
+		stress_impact = {
+			greedy = major_stress_impact_loss
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	#Leave it...
+	option = {
+		name = ac.12.c
+		add_piety = minor_piety_gain
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#Settlement Razed
+ac.13 = {
+	type = character_event
+	title = ac.13.t
+	desc = ac.13.desc
+	theme = battle
+	override_background = {
+		event_background = burning_building
+	}
+	left_portrait = {
+		character = root
+		animation = happy
+	}
+
+	immediate = {
+		add_character_modifier = {
+			modifier = hightened_troop_morale_modifier
+			months = 6
+		}		
+	}
+
+	option = {
+		name = ac.13.a
+		trigger = {
+			has_any_nickname = yes
+		}
+	}
+
+	#Nickname gain
+	option = {
+		name = ac.13.b
+		trigger = {
+			OR = { # Has no nickname or a bad nickname
+				has_any_nickname = no
+				has_bad_nickname = yes
+			}
+		}
+
+		random_list = {
+			30 = {
+				set_nickname_effect = { NICKNAME = nick_the_reaper }
+			}
+			30 = {
+				set_nickname_effect = { NICKNAME = nick_the_dreadful }
+			}
+			30 = {
+				set_nickname_effect = { NICKNAME = nick_the_scourge }
+			}
+		}
+	}
+}
+#Settlement Sacked
+ac.14 = {
+	type = character_event
+	title = ac.14.t
+	desc = ac.14.desc
+	theme = battle
+	override_background = {
+		event_background = burning_building
+	}
+	left_portrait = {
+		character = root
+		animation = happy
+	}
+
+	immediate = {
+		add_character_modifier = {
+			modifier = hightened_troop_morale_modifier
+			months = 3
+		}
+		root.capital_county = {
+			add_county_modifier = {	
+				modifier = ac_influx
+				years = 1
+			}
+		}		
+	}
+
+	option = {
+		name = ac.14.a
+	}
+}
+
+#Battle Captives
+ac.15 = {
+	hidden = yes
+	scope = combat_side
+	trigger = {
+		scope:wipe = no
+		exists = side_commander
+		side_commander = { is_ai = no }
+		side_commander = { is_alive = yes }
+	}
+
+	immediate = {
+		side_commander = {
+			trigger_event = { id = ac.10 }
+		}
+	}
+}
+
+ac.16 = {
+	hidden = yes
+	scope = combat_side
+	trigger = {
+		scope:wipe = yes
+		exists = side_commander
+		side_commander = { is_ai = no }
+		side_commander = { is_alive = yes }
+	}
+
+	immediate = {
+		side_commander = {
+			trigger_event = { id = ac.11 }
+		}
+	}
+}
+
+
+ac.10 = {
+	type = character_event
+	title = ac.10.t
+	desc = ac.10.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	option = {
+		name = ac.10.a
+		root = {
+			add_piety = 10
+		}
+	}
+
+	option = {
+		name = ac.10.b
+		root = {
+			add_prestige = 10		
+		}
+	}
+
+	option = {
+		name = ac.10.c
+		root = {
+			add_gold = 10	
+		}
+	}
+
+	option = {
+		name = ac.10.d
+		capital_county = {
+			change_development_progress = 10
+		}			
+	}
+}
+
+ac.11 = {
+	type = character_event
+	scope:combat_winner
+	title = ac.11.t
+	desc = ac.11.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = idle
+	}
+
+	option = {
+		name = ac.10.a
+		root = {
+			add_piety = medium_piety_value
+		}
+	}
+
+	option = {
+		name = ac.10.b
+		root = {
+			add_prestige = medium_prestige_value		
+		}
+	}
+
+	option = {
+		name = ac.10.c
+		root = {
+			add_gold = 50	
+		}
+	}
+
+	option = {
+		name = ac.10.d
+		root.capital_county = {
+			change_development_progress = medium_development_progress_gain
+		}			
+	}
+}
